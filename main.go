@@ -46,24 +46,27 @@ func main() {
 	}
 
 	if min > max {
-		log.Fatalf("Please make sure the minimum price %f is smaller than the maximum price %f", min, max)
+		log.Fatalf("Please make sure the minimum price %f is smaller than the maximum price %f\n", min, max)
 	}
 
 	exchange = strings.ToUpper(exchange)
 	symbol = strings.ToUpper(symbol)
 	url := fmt.Sprintf("https://www.google.com/finance?q=%s:%s", exchange, symbol)
+	errorAlert := exec.Command("terminal-notifier", "-title", "Monitor exits alert", "-message", "Please restart")
 
 	// Ping and get the price data in every 30 - 40 seconds
 	for {
 		// Get the response from google finance search
 		response, getError := http.Get(url)
 		if getError != nil {
+			errorAlert.Run()
 			log.Fatalln(getError)
 		}
 
 		// Parse the fetched html file into nodes
 		node, parseError := html.Parse(response.Body)
 		if parseError != nil {
+			errorAlert.Run()
 			log.Fatalln(parseError)
 		}
 
@@ -100,24 +103,27 @@ func main() {
 		// If the returned and parsed HTML file does not contain any node with the specified
 		// (name, value) pair, we assume the provided stock symbol is actually invalid
 		if len(result) == 0 {
+			errorAlert.Run()
 			log.Fatalf("The stock exchange code %s or the stock symbol %s is invalid\n", exchange, symbol)
 		}
 		priceNode := result[0].FirstChild.NextSibling.FirstChild
 		price, _ := strconv.ParseFloat(priceNode.Data, 64)
 
-		var title string
-		var message string
-		if price <= min {
-			title = "Price drop alert"
-			message = fmt.Sprintf("The stock %s's price is now $%f\n", symbol, price)
+		if price <= min || price >= max {
+			var title string
+			if price <= min {
+				title = "Price drop alert"
+			} else {
+				title = "Price rise alert"
+			}
+			message := fmt.Sprintf("The stock %s's price is now $%f\n", symbol, price)
+			alert := exec.Command("terminal-notifier", "-title", title, "-message", message)
+			fmt.Printf(message)
+			alert.Run()
 		}
-		if price >= max {
-			title = "Price rise alert"
-			message = fmt.Sprintf("The stock %s's price is now $%f\n", symbol, price)
-		}
-		fmt.Printf(message)
-		alert := exec.Command("terminal-notifier", "-title", title, "-message", message)
-		alert.Run()
+
+		fmt.Printf("Price is now %f\n", price)
+
 		// Sleep randomly from 30 seconds to 40 seconds
 		time.Sleep(time.Duration((30000 + rand.Intn(11)*1000)) * time.Millisecond)
 	}
