@@ -21,7 +21,7 @@ run
 $ brew install terminal-notifier
 ```
 and you are done.
-**This will be addressed in the future as I might embed the terminal-notifier in the source code so you do
+**This will be improved in the future as I might embed the terminal-notifier in the source code so you do
 not have to install terminal-notifier by yourself. I will also add supports to Windows and Linux**
 
 Usage
