@@ -18,7 +18,7 @@ import (
 var usage = `
   Usage: simple-quote-monitor [options]
 
-  -se <stock exchange>     The code of stock exchange
+  -se <stock exchange>     The code of stock exchange market
   -ss <stock symbol>       The unique series of letters of a security
   -min <number>            The minimum price watching for
   -max <number>            The maximum price watching for
