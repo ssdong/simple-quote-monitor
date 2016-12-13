@@ -1,6 +1,6 @@
 simple-quote-monitor
 ===========================
-A simple Go tool for monitoring stock quotes and sending desktop alerts when price drops or rises to certain amount
+A simple command line Go tool for monitoring stock quotes and sending desktop alerts when price drops or rises to certain amount
 
 
 How it works
@@ -22,6 +22,30 @@ $ brew install terminal-notifier
 and you are done.
 **This will be addressed in the future as I might embed the terminal-notifier in the source code so you do
 not have to install terminal-notifier by yourself. I will also add supports to Windows and Linux**
+
+Usage
+-----
+Install this tool with
+```
+go get github.com/ssdong/simple-quote-monitor
+```
+
+The command line options are
+```
+Usage: simple-quote-monitor [options]
+
+-se <stock exchange>     The code of stock exchange
+-ss <stock symbol>       The unique series of letters of a security
+-min <number>            The minimum price watching for
+-max <number>            The maximum price watching for
+```
+
+E.g. run
+```
+simple-quote-monitor -se=cve -ss=icc -min=0.5 -max=1
+```
+will monitor stock ICC in the stock exchange CVE with a minimum price of $0.5 and maximum of $1. It will
+send you notifications when the price falls outside of this range(including these two numbers).
 
 Tips
 ----
