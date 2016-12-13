@@ -8,6 +8,7 @@ How it works
 Tired keeping track of the stock quotes ? Let simple-quote-monitor come rescue. It will periodically check the quote for
 every 30 to 40 seconds and send desktop alerts when price drops or rises to certain amount.
 ![Desktop alert](../master/example.png?raw=true)
+
 It scrapes google finance website and finds the price on it. Unfortunately, I didn't find great finance API and google also deprecated theirs so I am doing scraping instead. **However, when you use this tool, please keep in mind that the data from google finance are NOT real-time in all cases. Some stocks have real-time while many others have around 15 mins delay.** When you set the range of price you are watching, please consider this 15 mins delay. This might be addressed in the future if I find providers who have real-time stock quotes.
 
 Dependencies
