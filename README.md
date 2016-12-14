@@ -5,8 +5,7 @@ A simple command line Go tool for monitoring stock quotes and sending desktop al
 
 How it works
 ------------
-Tired keeping track of the stock quotes ? Let simple-quote-monitor come rescue. It will periodically check the quote for
-every 30 to 40 seconds and send desktop alerts when price drops or rises to certain amount.
+Tired keeping track of the stock quotes ? Let simple-quote-monitor come rescue. It will periodically check the quote every 30 to 40 seconds(randomly) and send desktop alerts when price drops or rises to certain amount.
 
 ![Desktop alert](../master/example.png?raw=true)
 
