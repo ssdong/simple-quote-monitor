@@ -61,6 +61,8 @@ func main() {
 			log.Fatalln(getError)
 		}
 
+		defer response.Body.Close()
+
 		// Parse the fetched html file into nodes
 		node, parseError := html.Parse(response.Body)
 		if parseError != nil {
