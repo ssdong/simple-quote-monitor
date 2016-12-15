@@ -5,8 +5,7 @@ A simple command line Go tool for monitoring stock quotes and sending desktop al
 
 How it works
 ------------
-Tired keeping track of the stock quotes ? Let simple-quote-monitor come rescue. It will periodically check the quote for
-every 30 to 40 seconds and send desktop alerts when price drops or rises to certain amount.
+Tired keeping track of the stock quotes ? Let simple-quote-monitor come rescue. It will periodically check the quote every 30 to 40 seconds(randomly) and send desktop alerts when price drops or rises to certain amount.
 
 ![Desktop alert](../master/example.png?raw=true)
 
@@ -35,7 +34,7 @@ The command line options are
 ```
 Usage: simple-quote-monitor [options]
 
--se <stock exchange>     The code of stock exchange
+-se <stock exchange>     The code of stock exchange market
 -ss <stock symbol>       The unique series of letters of a security
 -min <number>            The minimum price watching for
 -max <number>            The maximum price watching for
@@ -45,12 +44,12 @@ E.g. run
 ```
 simple-quote-monitor -se=cve -ss=icc -min=0.5 -max=1
 ```
-will monitor stock ICC in the stock exchange CVE with a minimum price of $0.5 and maximum of $1. It will
+will monitor stock ICC in the stock exchange market CVE with a minimum price of $0.5 and maximum of $1. It will
 send you notifications when the price falls outside of this range(including these two numbers).
 
 Tips
 ----
 If you want the desktop alert to stay until you clicks it you would have to change your notification preferences for
-terminal-notifier in notification centre as this [one](https://www.dropbox.com/s/n2kt0in8q6syiu6/Screenshot%202016-10-11%2014.27.27.png?dl=0)
+terminal-notifier in notification centre as this [one](https://www.dropbox.com/s/n2kt0in8q6syiu6/Screenshot%202016-10-11%2014.27.27.png?dl=0).
 Otherwise, the notification will go away in 5 seconds and you might miss it. Unfortunately this is something you have to
 do it manually since OSX forces the notification to disappear within a certain amount of time.
